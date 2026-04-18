@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dos Líneas Sinusoidales Dinámicas</title>
+    <style>
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            padding-top: 20px;
+        }
+        canvas { 
+            background-color: #ffffff; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h2 { color: #333; margin-bottom: 5px;}
+        .legend { margin-bottom: 15px; font-size: 14px; }
+        .dot { height: 10px; width: 10px; display: inline-block; border-radius: 50%; margin-right: 5px; margin-left: 15px;}
+    </style>
+</head>
+<body>
+    <h2>Ondas Sinusoidales Dobles</h2>
+    <div class="legend">
+        <span class="dot" style="background-color: #2563eb;"></span> Seno(x)
+        <span class="dot" style="background-color: #16a34a;"></span> Coseno(x)
+    </div>
+    <canvas id="myCanvas" width="800" height="400"></canvas>
+
+<script>
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+
+    // Configuración común
+    var xstart = 0; 
+    var xend = canvas.width; 
+    var step = 1; // Resolución horizontal
+    var time = 0; // Factor de animación
+
+    // Constantes matemáticas para las ondas
+    var Amplitud = 100; // Píxeles de alto
+    var Frecuencia = 0.02; // Qué tan juntas están las ondas
+
+    function drawGrid() {
+        var gridSize = 40; 
+        var subGridSize = 10; 
+
+        // 1. Cuadrícula pequeña (tenue)
+        ctx.beginPath();
+        ctx.strokeStyle = "#f5f5f5";
+        ctx.lineWidth = 0.5;
+        for (var x = 0; x <= canvas.width; x += subGridSize) {
+            ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height);
+        }
+        for (var y = 0; y <= canvas.height; y += subGridSize) {
+            ctx.moveTo(0, y); ctx.lineTo(canvas.width, y);
+        }
+        ctx.stroke();
+
+        // 2. Cuadrícula principal
+        ctx.beginPath();
+        ctx.strokeStyle = "#e5e5e5";
+        ctx.lineWidth = 1;
+        for (var x = 0; x <= canvas.width; x += gridSize) {
+            ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height);
+        }
+        for (var y = 0; y <= canvas.height; y += gridSize) {
+            ctx.moveTo(0, y); ctx.lineTo(canvas.width, y);
+        }
+        ctx.stroke();
+
+        // 3. Ejes Principales (X e Y)
+        ctx.beginPath();
+        ctx.strokeStyle = "#555";
+        ctx.lineWidth = 2;
+        ctx.moveTo(0, canvas.height / 2); // Eje X central
+        ctx.lineTo(canvas.width, canvas.height / 2);
+        ctx.moveTo(gridSize, 0); // Eje Y lateral
+        ctx.lineTo(gridSize, canvas.height);
+        ctx.stroke();
+
+        // Etiquetas de ejes
+        ctx.fillStyle = "#777";
+        ctx.font = "bold 12px sans-serif";
+        ctx.fillText("X", canvas.width - 20, canvas.height / 2 - 10);
+        ctx.fillText("Y", gridSize + 10, 20);
+    }
+
+    function drawGraph() {
+        // Limpiar
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
+        
+        // Fondo
+        drawGrid();
+
+        var centerY = canvas.height / 2;
+
+        // --- DIBUJAR LÍNEA 1: SENO (AZUL) ---
+        ctx.beginPath();
+        ctx.strokeStyle = '#2563eb'; // Azul vibrante
+        ctx.lineWidth = 3; // Más gruesa
+        ctx.lineJoin = "round";
+        
+        for (var x = xstart; x < xend; x += step) {
+            // Función Seno estándar animada
+            var y = Math.sin(x * Frecuencia + time); 
+            var canvasY = centerY - (y * Amplitud);
+
+            if (x === xstart) {
+                ctx.moveTo(x, canvasY);
+            } else {
+                ctx.lineTo(x, canvasY);
+            }
+        }
+        ctx.stroke(); 
+
+        // --- DIBUJAR LÍNEA 2: COSENO (VERDE) ---
+        ctx.beginPath();
+        ctx.strokeStyle = '#16a34a'; // Verde esmeralda
+        ctx.lineWidth = 2; // Un poco más fina para diferenciar
+        ctx.lineJoin = "round";
+        
+        // Usamos una fase o velocidad ligeramente distinta para que la animación se vea compleja
+        var timePhaseVerde = time * 0.8; // Se mueve un 20% más lento
+
+        for (var x = xstart; x < xend; x += step) {
+            // Usamos Math.cos para que sea una función sinusoidal diferente
+            var y = Math.cos(x * Frecuencia + timePhaseVerde); 
+            var canvasY = centerY - (y * Amplitud);
+
+            if (x === xstart) {
+                ctx.moveTo(x, canvasY);
+            } else {
+                ctx.lineTo(x, canvasY);
+            }
+        }
+        ctx.stroke(); 
+    }
+
+    function animate() {
+        drawGraph();   
+        time -= 0.04; // Velocidad de animación general
+        requestAnimationFrame(animate); 
+    }
+
+    animate(); 
+</script>  
+</body>
+</html>
