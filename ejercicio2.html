@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráfico de Puntos en Movimiento</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        canvas {
+            background-color: #ecf0f1;
+            border: 3px solid #34495e;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Realizado por Frank Diego Gonzales Pantoja</h2>
+    
+    <canvas id="miLienzo" width="600" height="400"></canvas>
+
+
+
+    <script>
+        // 1. Configuración inicial
+        const canvas = document.getElementById('miLienzo');
+        const ctx = canvas.getContext('2d');
+
+        // Creamos un arreglo con 5 puntos, cada uno con su posición y color
+        let puntos = [
+            { x: 100, y: 100, color: '#e74c3c' },
+            { x: 200, y: 150, color: '#f1c40f' },
+            { x: 300, y: 200, color: '#2ecc71' },
+            { x: 400, y: 250, color: '#9b59b6' },
+            { x: 500, y: 300, color: '#3498db' }
+        ];
+
+        // 2. Función para dibujar los puntos
+        function dibujarPuntos() {
+            // Limpiar el lienzo (fundamental para que no se vean los puntos anteriores)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            puntos.forEach(punto => {
+                ctx.beginPath();
+                // Dibujamos un círculo (arco de 360 grados)
+                ctx.arc(punto.x, punto.y, 10, 0, Math.PI * 2);
+                ctx.fillStyle = punto.color;
+                ctx.fill();
+                ctx.closePath();
+
+                // Dibujar una pequeña etiqueta con sus coordenadas
+                ctx.fillStyle = "#333";
+                ctx.fillText(`(${punto.x}, ${punto.y})`, punto.x + 15, punto.y + 5);
+            });
+        }
+
+        // 3. Función para actualizar las posiciones
+        function actualizarPosiciones() {
+            puntos.forEach(punto => {
+                // Generamos nuevas coordenadas aleatorias dentro de los límites del canvas
+                // Margen de 20 para que no se corten en los bordes
+                punto.x = Math.floor(Math.random() * (canvas.width - 40)) + 20;
+                punto.y = Math.floor(Math.random() * (canvas.height - 40)) + 20;
+            });
+
+            // Una vez actualizados, volvemos a dibujar
+            dibujarPuntos();
+        }
+
+        // 4. Ejecutar cada segundo (1000ms)
+        setInterval(actualizarPosiciones, 1000);
+
+        // Dibujo inicial
+        dibujarPuntos();
+    </script>
+</body>
+</html>
