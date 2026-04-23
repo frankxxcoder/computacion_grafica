@@ -3,200 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Portfolio | Frank Diego</title>
+    <title>Índice de Programación</title>
     <style>
-        :root {
-            --bg-color: #0d1117;
-            --sidebar-color: #161b22;
-            --accent-color: #58a6ff;
-            --text-color: #c9d1d9;
-            --border-color: #30363d;
-            --hover-color: #1f242c;
-            --font-mono: 'Fira Code', 'Cascadia Code', monospace;
-        }
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: var(--font-mono), 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            overflow: hidden;
-        }
-
-        /* Contenedor Principal */
-        .app-container {
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
             display: flex;
-            height: 100vh;
-            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
         }
-
-        /* Barra Superior (Header) */
-        header {
-            background-color: var(--sidebar-color);
-            padding: 10px 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
         }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
         }
-
-        .dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; }
-        .red { background-color: #ff5f56; }
-        .yellow { background-color: #ffbd2e; }
-        .green { background-color: #27c93f; }
-
-        h1 {
-            font-size: 14px;
-            margin: 0;
-            font-weight: 400;
-            color: var(--accent-color);
-        }
-
-        /* Layout de Cuerpo */
-        .main-content {
-            display: flex;
-            flex: 1;
-        }
-
-        /* Sidebar (Navegación de tareas) */
-        nav {
-            width: 250px;
-            background-color: var(--sidebar-color);
-            border-right: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .nav-title {
-            padding: 15px;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #8b949e;
-        }
-
-        .nav-links {
+        ul {
             list-style: none;
             padding: 0;
-            margin: 0;
         }
-
-        .nav-links li a {
-            display: block;
-            padding: 10px 20px;
-            color: var(--text-color);
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-left: 5px solid #3498db;
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        li:hover {
+            transform: translateX(10px);
+            background: #eef2f7;
+        }
+        a {
             text-decoration: none;
-            font-size: 13px;
-            border-left: 2px solid transparent;
-            transition: 0.2s;
-        }
-
-        .nav-links li a:hover {
-            background-color: var(--hover-color);
-            color: white;
-        }
-
-        .nav-links li a.active {
-            background-color: var(--hover-color);
-            border-left: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        /* Contenedor del Iframe (Ventana de visualización) */
-        .viewer {
-            flex: 1;
-            background-color: #ffffff; /* Fondo blanco para que las tareas se vean bien */
-            position: relative;
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Footer / Status Bar */
-        footer {
-            background-color: var(--accent-color);
-            color: #000;
-            padding: 2px 15px;
-            font-size: 11px;
-            display: flex;
-            justify-content: space-between;
+            color: #2980b9;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    <header>
-        <div class="user-info">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span style="margin-left: 10px;">root@frank-diego: ~ /university_projects</span>
-        </div>
-        <h1>Developer: Frank Diego Gonzales Pantoja</h1>
-    </header>
-
-    <div class="main-content">
-        <nav>
-            <div class="nav-title">Explorador de Proyectos</div>
-            <ul class="nav-links">
-                <li><a href="#" onclick="loadPage('home.html', this)" class="active">/ index.txt</a></li>
-                <li><a href="#" onclick="loadPage('ejercicio1.html', this)">/ tarea_01.html</a></li>
-                <li><a href="#" onclick="loadPage('ejercicio2.html', this)">/ tarea_02.html</a></li>
-                <li><a href="#" onclick="loadPage('ejercicio3.html', this)">/ tarea_03.html</a></li>
-            </ul>
-        </nav>
-
-        <div class="viewer">
-            <iframe id="content-frame" src="about:blank"></iframe>
-        </div>
-    </div>
-
-    <footer>
-        <div>UTF-8 | HTML/CSS/JS</div>
-        <div>Frank Diego Gonzales Pantoja &copy; 2024</div>
-    </footer>
+<div class="container">
+    <h2>📚 Índice de Programación</h2>
+    <ul id="indice-lista"></ul>
 </div>
 
 <script>
-    function loadPage(pageUrl, element) {
-        // Cambiar el src del iframe
-        document.getElementById('content-frame').src = pageUrl;
+    // 1. Definimos los temas en un arreglo de objetos
+    const temas = [
+        { titulo: "Fundamentos de Lógica", link: "#logica" },
+        { titulo: "HTML5 y Estructura Web", link: "#html" },
+        { titulo: "CSS3 y Diseño Responsivo", link: "#css" },
+        { titulo: "JavaScript Moderno (ES6+)", link: "#js" },
+        { titulo: "Estructuras de Datos", link: "#datos" },
+        { titulo: "Bases de Datos SQL y NoSQL", link: "#db" },
+        { titulo: "APIs y Microservicios", link: "#api" },
+        { titulo: "Despliegue (Cloud & CI/CD)", link: "#deploy" }
+    ];
 
-        // Quitar la clase active de todos los links
-        const links = document.querySelectorAll('.nav-links a');
-        links.forEach(link => link.classList.remove('active'));
+    // 2. Referenciamos el elemento del DOM
+    const listaUl = document.getElementById('indice-lista');
 
-        // Agregar clase active al seleccionado
-        element.classList.add('active');
+    // 3. Función para renderizar el índice
+    function generarIndice() {
+        temas.forEach(tema => {
+            const li = document.createElement('li');
+            li.innerHTML = `<a href="${tema.link}">${tema.titulo}</a>`;
+            listaUl.appendChild(li);
+        });
     }
 
-    // Mensaje inicial en el iframe (opcional)
-    window.onload = () => {
-        const frame = document.getElementById('content-frame').contentWindow.document;
-        frame.open();
-        frame.write(`
-            <body style="background:#0d1117; color:#58a6ff; font-family:monospace; display:flex; justify-content:center; align-items:center; height:90vh; flex-direction:column;">
-                <h2>> Bienvenido al repositorio de tareas</h2>
-                <p style="color:#c9d1d9">Selecciona un archivo en la izquierda para visualizar el contenido.</p>
-                <div style="border: 1px solid #30363d; padding: 20px; border-radius: 5px;">
-                    <code style="color:#7ee787">System.out.println("Hola, profesor!");</code>
-                </div>
-            </body>
-        `);
-        frame.close();
-    };
+    // 4. Ejecutamos la función al cargar la página
+    generarIndice();
 </script>
 
 </body>
