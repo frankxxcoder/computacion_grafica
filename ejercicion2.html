@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotación 3D - Ejes X e Y</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #050505; }
+        canvas { display: block; }
+        #ui {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: #00ff88;
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui">
+        <strong>Práctica 2: Rotación</strong><br>
+        Eje X: <span id="valX">0</span> radianes<br>
+        Eje Y: <span id="valY">0</span> radianes
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+    
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+       
+        const geometry = new THREE.BoxGeometry(2, 2, 2);
+        const material = new THREE.MeshNormalMaterial(); 
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        camera.position.z = 5;
+
+      
+        const valX = document.getElementById('valX');
+        const valY = document.getElementById('valY');
+
+       
+        function animate() {
+            requestAnimationFrame(animate);
+
+           
+            
+            cube.rotation.x += 0.01; 
+            cube.rotation.y += 0.01; 
+
+           
+            valX.innerText = cube.rotation.x.toFixed(2);
+            valY.innerText = cube.rotation.y.toFixed(2);
+
+            renderer.render(scene, camera);
+        }
+
+    
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
