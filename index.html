@@ -25,14 +25,12 @@
             overflow: hidden;
         }
 
-        /* Contenedor Principal */
         .app-container {
             display: flex;
             height: 100vh;
             flex-direction: column;
         }
 
-        /* Barra Superior (Header) */
         header {
             background-color: var(--sidebar-color);
             padding: 10px 20px;
@@ -42,88 +40,94 @@
             align-items: center;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .user-info { display: flex; align-items: center; gap: 10px; }
         .dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; }
         .red { background-color: #ff5f56; }
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
 
-        h1 {
-            font-size: 14px;
-            margin: 0;
-            font-weight: 400;
-            color: var(--accent-color);
-        }
+        h1 { font-size: 14px; margin: 0; font-weight: 400; color: var(--accent-color); }
 
-        /* Layout de Cuerpo */
-        .main-content {
-            display: flex;
-            flex: 1;
-        }
+        .main-content { display: flex; flex: 1; }
 
-        /* Sidebar (Navegación de tareas) */
+        /* --- Estilos del Menú Lateral --- */
         nav {
-            width: 250px;
+            width: 260px;
             background-color: var(--sidebar-color);
             border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .nav-title {
             padding: 15px;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: #8b949e;
         }
 
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .nav-links { list-style: none; padding: 0; margin: 0; }
+
+        /* Estilo para los botones que abren carpetas */
+        .folder-btn {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 10px 20px;
+            color: var(--text-color);
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: 0.2s;
         }
+
+        .folder-btn:hover { background-color: var(--hover-color); }
+        
+        /* Icono de flecha para las carpetas */
+        .folder-btn::before {
+            content: '▸';
+            margin-right: 8px;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+
+        .folder-btn.open::before { transform: rotate(90deg); }
+
+        /* Submenú oculto por defecto */
+        .submenu {
+            display: none;
+            list-style: none;
+            padding-left: 20px; /* Indentación para subarchivos */
+            background-color: #0d1117;
+        }
+
+        .submenu.show { display: block; }
 
         .nav-links li a {
             display: block;
-            padding: 10px 20px;
-            color: var(--text-color);
+            padding: 8px 20px;
+            color: #8b949e;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             border-left: 2px solid transparent;
             transition: 0.2s;
         }
 
-        .nav-links li a:hover {
-            background-color: var(--hover-color);
-            color: white;
-        }
-
+        .nav-links li a:hover { color: white; background-color: var(--hover-color); }
         .nav-links li a.active {
-            background-color: var(--hover-color);
-            border-left: 2px solid var(--accent-color);
             color: var(--accent-color);
+            border-left: 2px solid var(--accent-color);
         }
 
-        /* Contenedor del Iframe (Ventana de visualización) */
-        .viewer {
-            flex: 1;
-            background-color: #ffffff; /* Fondo blanco para que las tareas se vean bien */
-            position: relative;
-        }
+        /* --- Visualizador --- */
+        .viewer { flex: 1; background-color: #ffffff; position: relative; }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Footer / Status Bar */
         footer {
             background-color: var(--accent-color);
             color: #000;
@@ -139,22 +143,35 @@
 <div class="app-container">
     <header>
         <div class="user-info">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-            <span style="margin-left: 10px;">root@frank-diego: ~ /university_projects</span>
+            <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            <span style="margin-left: 10px;">root@frank-diego: ~ /projects</span>
         </div>
         <h1>Developer: Frank Diego Gonzales Pantoja</h1>
     </header>
 
     <div class="main-content">
         <nav>
-            <div class="nav-title">Explorador de Proyectos</div>
+            <div class="nav-title">Explorador</div>
             <ul class="nav-links">
-                <li><a href="#" onclick="loadPage('home.html', this)" class="active">/ index.txt</a></li>
-                <li><a href="#" onclick="loadPage('ejercicion1.html', this)">/ tarea_01.html</a></li>
-                <li><a href="#" onclick="loadPage('ejercicion2.html', this)">/ tarea_02.html</a></li>
-                <li><a href="#" onclick="loadPage('ejercicion3.html', this)">/ tarea_03.html</a></li>
+                <li><a href="#" onclick="loadPage('home.html', this)" class="active">index.txt</a></li>
+                <!--<li><a href="#" onclick="loadPage('ejercicion1.html', this)">tarea_01.html</a></li>-->
+                
+                <li>
+                    <button class="folder-btn" onclick="toggleFolder('menu5', this)">Actividad Número 5</button>
+                    <ul id="menu5" class="submenu">
+                        <li><a href="#" onclick="loadPage('ejercicion1.html', this)">/ tarea1.html</a></li>
+                        <li><a href="#" onclick="loadPage('ejercicion2.html', this)">/ tarea2.html</a></li>
+						<li><a href="#" onclick="loadPage('ejercicion3.html', this)">/ tarea3.html</a></li>
+                        </ul>
+                </li>
+
+                <li>
+                    <button class="folder-btn" onclick="toggleFolder('menu6', this)">Actividad Número 6</button>
+                    <ul id="menu6" class="submenu">
+                        <li><a href="#" onclick="loadPage('n6/curvas_parametricas.html', this)">/ CURVAS PARAMETRICAS</a></li>
+                        <li><a href="#" onclick="loadPage('n6/mallas_poligonales.html', this)">/ MALLAS POLIGONALES</a></li>
+                        </ul>
+                </li>
             </ul>
         </nav>
 
@@ -170,29 +187,33 @@
 </div>
 
 <script>
+    // Función para mostrar/ocultar carpetas
+    function toggleFolder(menuId, btn) {
+        const menu = document.getElementById(menuId);
+        menu.classList.toggle('show');
+        btn.classList.toggle('open');
+    }
+
+    // Función original modificada para manejar la clase active correctamente
     function loadPage(pageUrl, element) {
-        // Cambiar el src del iframe
         document.getElementById('content-frame').src = pageUrl;
-
-        // Quitar la clase active de todos los links
-        const links = document.querySelectorAll('.nav-links a');
-        links.forEach(link => link.classList.remove('active'));
-
-        // Agregar clase active al seleccionado
+        
+        // Quitar clase active de todos los links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Agregar active al actual
         element.classList.add('active');
     }
 
-    // Mensaje inicial en el iframe (opcional)
     window.onload = () => {
         const frame = document.getElementById('content-frame').contentWindow.document;
         frame.open();
         frame.write(`
             <body style="background:#0d1117; color:#58a6ff; font-family:monospace; display:flex; justify-content:center; align-items:center; height:90vh; flex-direction:column;">
-                <h2>> Bienvenido al repositorio de tareas</h2>
-                <p style="color:#c9d1d9">Selecciona un archivo en la izquierda para visualizar el contenido.</p>
-                <div style="border: 1px solid #30363d; padding: 20px; border-radius: 5px;">
-                    <code style="color:#7ee787">System.out.println("Hola, profesor!");</code>
-                </div>
+                <h2>> Repositorio Organizado</h2>
+                <p style="color:#c9d1d9">Haz clic en las actividades para desplegar los archivos.</p>
             </body>
         `);
         frame.close();
