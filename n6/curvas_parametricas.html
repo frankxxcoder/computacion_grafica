@@ -45,127 +45,83 @@
             background-color: #3498db;
             color: white;
         }
+        /* Estilo para el área donde se cargará el contenido */
+        #contenido-dinamico {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px dashed #3498db;
+            background-color: #f0f8ff;
+            display: none; /* Oculto hasta que se cargue algo */
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
 
-<h1>Curvas Paramétricas</h1>
+    <h1>Curvas Paramétricas</h1>
 
-<h2>1. Introducción</h2>
-<p>
-En el estudio de la geometría y el cálculo, solemos estar acostumbrados a las funciones explícitas de la forma <strong>y = f(x)</strong>. Sin embargo, la naturaleza y la física no siempre se ajustan a esta simplicidad.
-</p>
-<p>
-Imagina el vuelo de una mosca o el movimiento de un satélite: describir estos trayectos con una sola función resulta imposible o extremadamente complejo.
-</p>
-<p>
-Aquí es donde entran las <strong>curvas paramétricas</strong>. En lugar de definir una variable en términos de otra, definimos ambas (x e y) en función de una tercera variable independiente llamada parámetro (t).
-</p>
+    <h2>1. Introducción</h2>
+    <p>
+    En el estudio de la geometría y el cálculo, solemos estar acostumbrados a las funciones explícitas de la forma <strong>y = f(x)</strong>. Sin embargo, la naturaleza y la física no siempre se ajustan a esta simplicidad.
+    </p>
 
-<h2>2. Definición Matemática</h2>
-<p>
-Si f y g son funciones continuas de una variable t, el conjunto de puntos (x, y) definidos por:
-</p>
+    <h2>2. Definición Matemática</h2>
+    <div class="formula">
+    x = f(t)<br>
+    y = g(t)
+    </div>
 
-<div class="formula">
-x = f(t)<br>
-y = g(t)
-</div>
+    <h2>4. Ejemplos Clásicos</h2>
 
-<p>Se denomina <strong>curva paramétrica</strong>.</p>
+    <ul>
+        <li>
+            <a href="javascript:void(0)" onclick="loadPage('circunferencia.html')"> 
+                A. Circunferencia (Hacer click para cargar contenido aquí abajo)
+            </a>
+        </li>
+    </ul>
 
-<h3>Componentes Clave</h3>
-<ul>
-    <li><strong>Parámetro (t):</strong> Variable independiente (tiempo, ángulo, etc.).</li>
-    <li><strong>Orientación:</strong> Define la dirección en la que se recorre la curva.</li>
-</ul>
+    <div id="contenido-dinamico"></div>
 
-<h2>3. Ventajas de la Parametrización</h2>
+    <div class="formula">
+    x = r cos(t)<br>
+    y = r sin(t)
+    </div>
 
-<ul>
-    <li>Permiten representar curvas que no son funciones.</li>
-    <li>Modelan movimiento (posición, velocidad, aceleración).</li>
-    <li>Describen trayectorias complejas.</li>
-</ul>
+    <p>Para 0 ≤ t ≤ 2π</p>
 
-<table>
-    <tr>
-        <th>Característica</th>
-        <th>Ecuación Cartesiana</th>
-        <th>Ecuación Paramétrica</th>
-    </tr>
-    <tr>
-        <td>Relación</td>
-        <td>y depende de x</td>
-        <td>x e y dependen de t</td>
-    </tr>
-    <tr>
-        <td>Dirección</td>
-        <td>No definida</td>
-        <td>Definida por t</td>
-    </tr>
-    <tr>
-        <td>Flexibilidad</td>
-        <td>Limitada</td>
-        <td>Total</td>
-    </tr>
-</table>
-
-<h2>4. Ejemplos Clásicos</h2>
-
-<li><a href="#" onclick="loadPage('circunferencia.html', this)"> A. Circunferencia          Hacer click para ver ejemplo</a></li>
-<div class="formula">
-x = r cos(t)<br>
-y = r sin(t)
-</div>
-
-<p>Para 0 ≤ t ≤ 2π</p>
-
-<h3>B. Cicloide</h3>
-<div class="formula">
-x = r(t - sin(t))<br>
-y = r(1 - cos(t))
-</div>
-
-<h2>5. Cálculo con Curvas Paramétricas</h2>
-
-<h3>Derivada (Pendiente)</h3>
-<div class="formula">
-dy/dx = (dy/dt) / (dx/dt)
-</div>
-
-<h3>Longitud de Arco</h3>
-<div class="formula">
-L = ∫ √[(dx/dt)² + (dy/dt)²] dt
-</div>
-
-<h2>6. Aplicaciones en el Mundo Real</h2>
-
-<ul>
-    <li><strong>Ingeniería y Diseño:</strong> Curvas de Bézier.</li>
-    <li><strong>Física:</strong> Movimiento de proyectiles.</li>
-</ul>
-
-<div class="formula">
-x(t) = v₀ cos(θ) t<br>
-y(t) = v₀ sin(θ) t - (1/2)gt²
-</div>
-
-<ul>
-    <li><strong>Animación:</strong> Trayectorias en gráficos 3D.</li>
-</ul>
-
-<h2>7. Conclusión</h2>
-<p>
-Las curvas paramétricas representan un salto conceptual hacia la geometría del movimiento. Permiten describir trayectorias complejas de forma clara y precisa.
-</p>
-<p>
-Son fundamentales en la física moderna, la robótica y el diseño digital.
-</p>
+    <h3>B. Cicloide</h3>
+    <div class="formula">
+    x = r(t - sin(t))<br>
+    y = r(1 - cos(t))
+    </div>
 
 </div>
+
+<script>
+    function loadPage(url) {
+        const contenedor = document.getElementById('contenido-dinamico');
+        
+        // Usamos fetch para obtener el contenido del archivo HTML
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('No se pudo encontrar el archivo: ' + url);
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Insertamos el HTML dentro del div y lo mostramos
+                contenedor.innerHTML = html;
+                contenedor.style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al cargar el ejemplo. Asegúrate de que "circunferencia.html" esté en la misma carpeta y que estés usando un servidor local (o subido a internet).');
+            });
+    }
+</script>
 
 </body>
 </html>
