@@ -16,18 +16,9 @@
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        h2 {
-            color: #34495e;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
-        }
-        h3 {
-            color: #2c3e50;
-        }
+        h1 { text-align: center; color: #2c3e50; }
+        h2 { color: #34495e; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+        h3 { color: #2c3e50; }
         .formula {
             background: #eef3ff;
             border-left: 5px solid #2980b9;
@@ -35,38 +26,113 @@
             margin: 15px 0;
             font-family: "Courier New", monospace;
         }
-        ul {
-            margin-left: 20px;
+        ul { margin-left: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+        th { background: #3498db; color: white; }
+
+        /* ── Demo boxes ── */
+        .demo-box {
+            margin: 20px 0 30px 0;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            background: #f0f8ff;
+            overflow: hidden;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
+        .demo-header {
             background: #3498db;
             color: white;
+            padding: 10px 18px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
+        .demo-body {
+            padding: 18px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+        canvas {
+            border: 1px solid #b0cfe8;
+            border-radius: 8px;
+            background: #1a1a2e;
+            cursor: crosshair;
+            flex-shrink: 0;
+        }
+        .demo-controls {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .ctrl-row { display: flex; flex-direction: column; gap: 4px; }
+        .ctrl-row label { font-size: 13px; font-weight: bold; color: #2c3e50; }
+        .ctrl-row input[type="range"] { width: 100%; accent-color: #3498db; }
+        .val-badge { font-size: 12px; color: #666; }
+        .btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .btn-blue  { background: #3498db; color: #fff; }
+        .btn-blue:hover  { background: #2980b9; }
+        .btn-gray  { background: #ecf0f1; color: #2c3e50; }
+        .btn-gray:hover  { background: #d5dbdb; }
+        .btn-red   { background: #e74c3c; color: #fff; }
+        .btn-red:hover   { background: #c0392b; }
+        .info-panel {
+            background: #fff;
+            border: 1px solid #c8dff0;
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+        .info-panel strong { color: #2980b9; }
+        .legend {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            align-items: center;
+        }
+        .legend-item { display: flex; align-items: center; gap: 5px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+        .hint { font-size: 12px; color: #777; font-style: italic; }
+        .tab-bar { display: flex; gap: 0; margin-bottom: 0; }
+        .tab {
+            padding: 7px 18px;
+            border: 1px solid #3498db;
+            cursor: pointer;
+            font-size: 13px;
+            background: #fff;
+            color: #3498db;
+            font-weight: bold;
+            transition: all 0.15s;
+        }
+        .tab:first-child { border-radius: 6px 0 0 6px; }
+        .tab:last-child  { border-radius: 0 6px 6px 0; }
+        .tab.active { background: #3498db; color: #fff; }
     </style>
 </head>
 <body>
-
 <div class="container">
 
 <h1>Mallas Poligonales: Estructura, Fundamentos y Aplicaciones en el Mundo Digital</h1>
 
 <h2>Introducción</h2>
-<p>
-En el ámbito de la computación gráfica y el diseño asistido por computadora (CAD), una <strong>malla poligonal</strong> es una colección de vértices, aristas y caras que definen la forma de un objeto tridimensional.
-</p>
-<p>
-Es el "esqueleto" digital que permite representar, renderizar y animar objetos en sistemas computacionales. Sin ellas, los videojuegos, efectos visuales y simulaciones modernas no existirían tal como los conocemos.
-</p>
+<p>En el ámbito de la computación gráfica y el diseño asistido por computadora (CAD), una <strong>malla poligonal</strong> es una colección de vértices, aristas y caras que definen la forma de un objeto tridimensional.</p>
+<p>Es el "esqueleto" digital que permite representar, renderizar y animar objetos en sistemas computacionales. Sin ellas, los videojuegos, efectos visuales y simulaciones modernas no existirían tal como los conocemos.</p>
 
 <h2>1. Componentes Geométricos</h2>
 <p>Una malla se compone de tres elementos fundamentales:</p>
@@ -78,17 +144,110 @@ Es el "esqueleto" digital que permite representar, renderizar y animar objetos e
 
 <h2>2. Tipos de Topología de Mallas</h2>
 
+<!-- ══════════════════════════════════════════
+     TRIÁNGULOS
+══════════════════════════════════════════ -->
 <h3>Mallas de Triángulos (Tris)</h3>
 <ul>
     <li><strong>Ventaja:</strong> Siempre coplanares, ideales para GPU.</li>
     <li><strong>Desventaja:</strong> Difíciles de manipular en animación.</li>
 </ul>
 
+<div class="demo-box">
+    <div class="demo-header">🔺 Demo interactiva — Malla de Triángulos</div>
+    <div class="demo-body">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+            <canvas id="cvTri" width="400" height="340"></canvas>
+            <div class="legend">
+                <div class="legend-item"><div class="dot" style="background:#e74c3c"></div> Vértice seleccionado</div>
+                <div class="legend-item"><div class="dot" style="background:#f39c12"></div> Triángulo activo</div>
+                <div class="legend-item"><div class="dot" style="background:#2ecc71"></div> Cara rellena</div>
+            </div>
+            <span class="hint">💡 Haz clic en vértices o caras para inspeccionarlos</span>
+        </div>
+        <div class="demo-controls">
+            <div class="ctrl-row">
+                <label>Subdivisiones (filas × cols)</label>
+                <input type="range" id="triSub" min="1" max="8" value="3" oninput="triDraw()">
+                <span class="val-badge">Grid: <strong id="triSubVal">3×3</strong> → <strong id="triCountVal">18</strong> triángulos</span>
+            </div>
+            <div class="ctrl-row">
+                <label>Tamaño de vértices</label>
+                <input type="range" id="triVSize" min="3" max="10" value="5" oninput="triDraw()">
+                <span class="val-badge">Radio: <strong id="triVSVal">5</strong>px</span>
+            </div>
+            <div class="tab-bar">
+                <div class="tab active" id="tabTriWire" onclick="setTriMode('wire')">Wireframe</div>
+                <div class="tab" id="tabTriFill" onclick="setTriMode('fill')">Relleno</div>
+                <div class="tab" id="tabTriBoth" onclick="setTriMode('both')">Ambos</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-blue" onclick="triShuffle()">🔀 Deformar</button>
+                <button class="btn btn-gray" onclick="triReset()">↺ Reiniciar</button>
+            </div>
+            <div class="info-panel" id="triInfo">
+                <strong>Selecciona</strong> un vértice o cara<br>
+                haciendo clic sobre el canvas.<br><br>
+                Una malla de triángulos garantiza<br>
+                que cada cara es <strong>coplanar</strong>,<br>
+                propiedad esencial para la GPU.
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CUADRILÁTEROS
+══════════════════════════════════════════ -->
 <h3>Mallas de Cuadriláteros (Quads)</h3>
 <ul>
     <li><strong>Ventaja:</strong> Mejor deformación y flujo de geometría.</li>
     <li><strong>Desventaja:</strong> Se convierten internamente en triángulos.</li>
 </ul>
+
+<div class="demo-box">
+    <div class="demo-header">🟦 Demo interactiva — Malla de Cuadriláteros</div>
+    <div class="demo-body">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+            <canvas id="cvQuad" width="400" height="340"></canvas>
+            <div class="legend">
+                <div class="legend-item"><div class="dot" style="background:#e74c3c"></div> Vértice seleccionado</div>
+                <div class="legend-item"><div class="dot" style="background:#9b59b6"></div> Quad activo</div>
+                <div class="legend-item"><div class="dot" style="background:#3498db"></div> Cara rellena</div>
+            </div>
+            <span class="hint">💡 Arrastra vértices para deformar la malla</span>
+        </div>
+        <div class="demo-controls">
+            <div class="ctrl-row">
+                <label>Subdivisiones</label>
+                <input type="range" id="quadSub" min="1" max="8" value="3" oninput="quadDraw()">
+                <span class="val-badge">Grid: <strong id="quadSubVal">3×3</strong> → <strong id="quadCountVal">9</strong> quads</span>
+            </div>
+            <div class="ctrl-row">
+                <label>Tamaño de vértices</label>
+                <input type="range" id="quadVSize" min="3" max="10" value="5" oninput="quadDraw()">
+                <span class="val-badge">Radio: <strong id="quadVSVal">5</strong>px</span>
+            </div>
+            <div class="tab-bar">
+                <div class="tab active" id="tabQuadWire" onclick="setQuadMode('wire')">Wireframe</div>
+                <div class="tab" id="tabQuadFill" onclick="setQuadMode('fill')">Relleno</div>
+                <div class="tab" id="tabQuadBoth" onclick="setQuadMode('both')">Ambos</div>
+                <div class="tab" id="tabQuadTri"  onclick="setQuadMode('tri')">→ Tris</div>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-blue" onclick="quadShuffle()">🔀 Deformar</button>
+                <button class="btn btn-gray" onclick="quadReset()">↺ Reiniciar</button>
+            </div>
+            <div class="info-panel" id="quadInfo">
+                <strong>Arrastra</strong> un vértice para ver<br>
+                cómo se deforma la malla.<br><br>
+                El modo <strong>"→ Tris"</strong> muestra cómo<br>
+                la GPU divide cada quad en<br>
+                2 triángulos internamente.
+            </div>
+        </div>
+    </div>
+</div>
 
 <h3>N-gons</h3>
 <ul>
@@ -97,14 +256,8 @@ Es el "esqueleto" digital que permite representar, renderizar y animar objetos e
 </ul>
 
 <h2>3. Representación Matemática</h2>
-<p>
-La estructura de una malla sigue reglas matemáticas. Una de las más importantes es la característica de Euler:
-</p>
-
-<div class="formula">
-V - E + F = χ
-</div>
-
+<p>La estructura de una malla sigue reglas matemáticas. Una de las más importantes es la característica de Euler:</p>
+<div class="formula">V - E + F = χ</div>
 <ul>
     <li>V: número de vértices</li>
     <li>E: número de aristas</li>
@@ -113,7 +266,6 @@ V - E + F = χ
 </ul>
 
 <h2>4. Estructuras de Datos</h2>
-
 <ul>
     <li><strong>Lista de Caras:</strong> Simple pero limitada.</li>
     <li><strong>Winged-edge:</strong> Permite navegación compleja.</li>
@@ -121,39 +273,484 @@ V - E + F = χ
 </ul>
 
 <h2>5. Aplicaciones Prácticas</h2>
-
 <table>
-    <tr>
-        <th>Campo</th>
-        <th>Uso</th>
-    </tr>
-    <tr>
-        <td>Videojuegos</td>
-        <td>Modelado optimizado de personajes y escenarios</td>
-    </tr>
-    <tr>
-        <td>Cine/VFX</td>
-        <td>Creación de modelos hiperrealistas</td>
-    </tr>
-    <tr>
-        <td>Impresión 3D</td>
-        <td>Uso de archivos STL</td>
-    </tr>
-    <tr>
-        <td>Ingeniería</td>
-        <td>Análisis de resistencia (FEA)</td>
-    </tr>
+    <tr><th>Campo</th><th>Uso</th></tr>
+    <tr><td>Videojuegos</td><td>Modelado optimizado de personajes y escenarios</td></tr>
+    <tr><td>Cine/VFX</td><td>Creación de modelos hiperrealistas</td></tr>
+    <tr><td>Impresión 3D</td><td>Uso de archivos STL</td></tr>
+    <tr><td>Ingeniería</td><td>Análisis de resistencia (FEA)</td></tr>
 </table>
 
 <h2>6. Conclusión</h2>
-<p>
-Las mallas poligonales constituyen la base del modelado 3D moderno. Su importancia radica en su equilibrio entre eficiencia y flexibilidad.
-</p>
-<p>
-Más allá de la cantidad de polígonos, el verdadero valor está en la <strong>topología</strong>: una organización adecuada que permite obtener modelos visualmente correctos y técnicamente optimizados.
-</p>
+<p>Casi todo lo que se modela en tres dimensiones hoy en día arranca desde las mallas poligonales. Su peso en la industria no se explica únicamente por lo generalizadas que están, sino por algo más sutil: la capacidad que tienen de equilibrar rendimiento y flexibilidad sin sacrificar uno por el otro.
+Ahora bien, quedarse contando polígonos es perderse lo esencial. Lo que verdaderamente define la calidad de un modelo es su topología, esto es, el criterio con el que se organizan todos esos elementos entre sí. Cuando esa estructura está bien pensada, el resultado habla por sí solo: geometría limpia a la vista y un modelo que no le pesa a la máquina.</p>
+
 
 </div>
 
+<script>
+/* ════════════════════════════════════════════
+   UTILIDADES COMUNES
+════════════════════════════════════════════ */
+function rnd(a, b) { return a + Math.random() * (b - a); }
+
+/* ════════════════════════════════════════════
+   MALLA DE TRIÁNGULOS
+════════════════════════════════════════════ */
+let triMode = 'wire';
+let triVerts = [];       // {x, y, ox, oy}
+let triSelected = null;  // índice de vértice seleccionado
+let triSelFace  = null;  // índice de triángulo seleccionado
+
+function triGetSub()   { return parseInt(document.getElementById('triSub').value); }
+function triGetVSize() { return parseInt(document.getElementById('triVSize').value); }
+
+function triGenVerts(sub) {
+    const canvas = document.getElementById('cvTri');
+    const pad = 30, W = canvas.width - pad*2, H = canvas.height - pad*2;
+    const verts = [];
+    for (let row = 0; row <= sub; row++) {
+        for (let col = 0; col <= sub; col++) {
+            const x = pad + (col / sub) * W;
+            const y = pad + (row / sub) * H;
+            verts.push({ x, y, ox: x, oy: y });
+        }
+    }
+    return verts;
+}
+
+function triGetFaces(sub) {
+    const faces = [];
+    for (let row = 0; row < sub; row++) {
+        for (let col = 0; col < sub; col++) {
+            const tl = row * (sub+1) + col;
+            const tr = tl + 1;
+            const bl = tl + (sub+1);
+            const br = bl + 1;
+            faces.push([tl, bl, tr]); // tri 1
+            faces.push([bl, br, tr]); // tri 2
+        }
+    }
+    return faces;
+}
+
+function triReset() {
+    const sub = triGetSub();
+    triVerts = triGenVerts(sub);
+    triSelected = null; triSelFace = null;
+    triDraw();
+}
+
+function triShuffle() {
+    const sub = triGetSub();
+    const canvas = document.getElementById('cvTri');
+    const pad = 30;
+    const cellW = (canvas.width  - pad*2) / sub;
+    const cellH = (canvas.height - pad*2) / sub;
+    const jitter = Math.min(cellW, cellH) * 0.28;
+    triVerts.forEach((v, i) => {
+        const row = Math.floor(i / (sub+1));
+        const col = i % (sub+1);
+        if (row > 0 && row < sub && col > 0 && col < sub) {
+            v.x = v.ox + rnd(-jitter, jitter);
+            v.y = v.oy + rnd(-jitter, jitter);
+        }
+    });
+    triDraw();
+}
+
+function setTriMode(m) {
+    triMode = m;
+    ['Wire','Fill','Both'].forEach(x => {
+        document.getElementById('tabTri'+x).classList.toggle('active', m === x.toLowerCase());
+    });
+    triDraw();
+}
+
+function triDraw() {
+    const canvas = document.getElementById('cvTri');
+    const ctx = canvas.getContext('2d');
+    const sub = triGetSub();
+    const vs  = parseInt(document.getElementById('triVSize').value);
+
+    document.getElementById('triSubVal').textContent   = sub + '×' + sub;
+    document.getElementById('triCountVal').textContent = sub * sub * 2;
+    document.getElementById('triVSVal').textContent    = vs;
+
+    if (triVerts.length !== (sub+1)*(sub+1)) {
+        triVerts = triGenVerts(sub);
+        triSelected = null; triSelFace = null;
+    }
+
+    const faces = triGetFaces(sub);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Relleno de caras
+    if (triMode === 'fill' || triMode === 'both') {
+        faces.forEach((f, fi) => {
+            const [a, b, c] = f.map(i => triVerts[i]);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y);
+            ctx.closePath();
+            if (fi === triSelFace) {
+                ctx.fillStyle = 'rgba(243,156,18,0.55)';
+            } else {
+                ctx.fillStyle = 'rgba(46,204,113,0.18)';
+            }
+            ctx.fill();
+        });
+    }
+
+    // Wireframe
+    if (triMode === 'wire' || triMode === 'both') {
+        faces.forEach((f, fi) => {
+            const [a, b, c] = f.map(i => triVerts[i]);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y);
+            ctx.closePath();
+            ctx.strokeStyle = fi === triSelFace ? '#f39c12' : '#4fc3f7';
+            ctx.lineWidth = fi === triSelFace ? 2.5 : 1.2;
+            ctx.stroke();
+        });
+    }
+
+    // Vértices
+    triVerts.forEach((v, i) => {
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, vs, 0, 2*Math.PI);
+        ctx.fillStyle = i === triSelected ? '#e74c3c' : '#f0f0f0';
+        ctx.fill();
+        ctx.strokeStyle = i === triSelected ? '#c0392b' : '#888';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    });
+}
+
+// Click en canvas triángulos
+document.getElementById('cvTri').addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const vs = triGetVSize() + 4;
+
+    // ¿tocó un vértice?
+    let hit = null;
+    triVerts.forEach((v, i) => {
+        if (Math.hypot(v.x - mx, v.y - my) < vs) hit = i;
+    });
+
+    if (hit !== null) {
+        triSelected = hit;
+        triSelFace  = null;
+        const v = triVerts[hit];
+        document.getElementById('triInfo').innerHTML =
+            `<strong>Vértice #${hit}</strong><br>` +
+            `Posición: (${v.x.toFixed(1)}, ${v.y.toFixed(1)})<br>` +
+            `Original: (${v.ox.toFixed(1)}, ${v.oy.toFixed(1)})<br><br>` +
+            `Los vértices son los puntos<br>fundamentales de la malla.<br>` +
+            `La GPU los procesa en el<br><strong>Vertex Shader</strong>.`;
+    } else {
+        // ¿tocó una cara?
+        const sub = triGetSub();
+        const faces = triGetFaces(sub);
+        let hitFace = null;
+        faces.forEach((f, fi) => {
+            const [a, b, c] = f.map(i => triVerts[i]);
+            if (pointInTriangle(mx, my, a, b, c)) hitFace = fi;
+        });
+        triSelected = null;
+        triSelFace  = hitFace;
+        if (hitFace !== null) {
+            const f = faces[hitFace];
+            document.getElementById('triInfo').innerHTML =
+                `<strong>Triángulo #${hitFace}</strong><br>` +
+                `Vértices: [${f.join(', ')}]<br>` +
+                `Área: ${triangleArea(triVerts[f[0]], triVerts[f[1]], triVerts[f[2]]).toFixed(1)} px²<br><br>` +
+                `Los triángulos son <strong>siempre planos</strong>.<br>` +
+                `Esta propiedad los hace<br>ideales para la GPU.`;
+        } else {
+            document.getElementById('triInfo').innerHTML =
+                `<strong>Selecciona</strong> un vértice o cara<br>haciendo clic sobre el canvas.`;
+        }
+    }
+    triDraw();
+});
+
+function pointInTriangle(px, py, a, b, c) {
+    const d1 = sign(px,py,a,b), d2 = sign(px,py,b,c), d3 = sign(px,py,c,a);
+    const hasNeg = (d1<0)||(d2<0)||(d3<0), hasPos = (d1>0)||(d2>0)||(d3>0);
+    return !(hasNeg && hasPos);
+}
+function sign(px,py,ax,ay,bx,by) {
+    if (typeof ax === 'object') { bx=ay.x; by=ay.y; ay=ax.y; bx=ay; ax=ax.x; }
+    return (px - bx) * (ay - by) - (ax - bx) * (py - by);
+}
+function sign2(px,py,a,b) {
+    return (px - b.x)*(a.y - b.y) - (a.x - b.x)*(py - b.y);
+}
+function pointInTri2(px,py,a,b,c) {
+    const d1=sign2(px,py,a,b), d2=sign2(px,py,b,c), d3=sign2(px,py,c,a);
+    return !((d1<0||d2<0||d3<0) && (d1>0||d2>0||d3>0));
+}
+function triangleArea(a,b,c) {
+    return Math.abs((b.x-a.x)*(c.y-a.y)-(c.x-a.x)*(b.y-a.y))/2;
+}
+
+// Redibujar al cambiar subdivisiones
+document.getElementById('cvTri').addEventListener('click', function(){}, false);
+
+
+/* ════════════════════════════════════════════
+   MALLA DE CUADRILÁTEROS
+════════════════════════════════════════════ */
+let quadMode = 'wire';
+let quadVerts = [];
+let quadDragging = null;
+let quadSelected = null;
+let quadSelFace  = null;
+
+function quadGetSub()   { return parseInt(document.getElementById('quadSub').value); }
+function quadGetVSize() { return parseInt(document.getElementById('quadVSize').value); }
+
+function quadGenVerts(sub) {
+    const canvas = document.getElementById('cvQuad');
+    const pad = 30, W = canvas.width - pad*2, H = canvas.height - pad*2;
+    const verts = [];
+    for (let row = 0; row <= sub; row++) {
+        for (let col = 0; col <= sub; col++) {
+            const x = pad + (col / sub) * W;
+            const y = pad + (row / sub) * H;
+            verts.push({ x, y, ox: x, oy: y });
+        }
+    }
+    return verts;
+}
+
+function quadGetFaces(sub) {
+    const faces = [];
+    for (let row = 0; row < sub; row++) {
+        for (let col = 0; col < sub; col++) {
+            const tl = row*(sub+1)+col;
+            faces.push([tl, tl+1, tl+(sub+1)+1, tl+(sub+1)]);
+        }
+    }
+    return faces;
+}
+
+function quadReset() {
+    quadVerts = quadGenVerts(quadGetSub());
+    quadSelected = null; quadSelFace = null; quadDragging = null;
+    quadDraw();
+}
+
+function quadShuffle() {
+    const sub = quadGetSub();
+    const canvas = document.getElementById('cvQuad');
+    const pad = 30;
+    const cellW = (canvas.width  - pad*2) / sub;
+    const cellH = (canvas.height - pad*2) / sub;
+    const jitter = Math.min(cellW, cellH) * 0.3;
+    quadVerts.forEach((v, i) => {
+        const row = Math.floor(i / (sub+1));
+        const col = i % (sub+1);
+        if (row > 0 && row < sub && col > 0 && col < sub) {
+            v.x = v.ox + rnd(-jitter, jitter);
+            v.y = v.oy + rnd(-jitter, jitter);
+        }
+    });
+    quadDraw();
+}
+
+function setQuadMode(m) {
+    quadMode = m;
+    ['Wire','Fill','Both','Tri'].forEach(x => {
+        document.getElementById('tabQuad'+x).classList.toggle('active', m === x.toLowerCase());
+    });
+    quadDraw();
+}
+
+function quadDraw() {
+    const canvas = document.getElementById('cvQuad');
+    const ctx = canvas.getContext('2d');
+    const sub = quadGetSub();
+    const vs  = parseInt(document.getElementById('quadVSize').value);
+
+    document.getElementById('quadSubVal').textContent   = sub + '×' + sub;
+    document.getElementById('quadCountVal').textContent = sub * sub;
+    document.getElementById('quadVSVal').textContent    = vs;
+
+    if (quadVerts.length !== (sub+1)*(sub+1)) {
+        quadVerts = quadGenVerts(sub);
+        quadSelected = null; quadSelFace = null;
+    }
+
+    const faces = quadGetFaces(sub);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Relleno
+    if (quadMode === 'fill' || quadMode === 'both') {
+        faces.forEach((f, fi) => {
+            const [a,b,c,d] = f.map(i => quadVerts[i]);
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+            ctx.lineTo(c.x,c.y); ctx.lineTo(d.x,d.y);
+            ctx.closePath();
+            ctx.fillStyle = fi === quadSelFace ? 'rgba(155,89,182,0.45)' : 'rgba(52,152,219,0.18)';
+            ctx.fill();
+        });
+    }
+
+    // Modo → Tris: dibuja la diagonal interna de cada quad
+    if (quadMode === 'tri') {
+        faces.forEach((f, fi) => {
+            const [a,b,c,d] = f.map(i => quadVerts[i]);
+            // Tri 1
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.lineTo(c.x,c.y); ctx.closePath();
+            ctx.fillStyle = 'rgba(231,76,60,0.18)'; ctx.fill();
+            // Tri 2
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y); ctx.lineTo(d.x,d.y); ctx.closePath();
+            ctx.fillStyle = 'rgba(46,204,113,0.18)'; ctx.fill();
+            // Wireframe general
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.lineTo(c.x,c.y); ctx.lineTo(d.x,d.y); ctx.closePath();
+            ctx.strokeStyle = '#4fc3f7'; ctx.lineWidth = 1; ctx.stroke();
+            // Diagonal (partición interna)
+            ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(c.x,c.y);
+            ctx.strokeStyle = '#f39c12'; ctx.lineWidth = 1.5; ctx.setLineDash([4,3]); ctx.stroke();
+            ctx.setLineDash([]);
+        });
+    } else {
+        // Wireframe normal
+        if (quadMode === 'wire' || quadMode === 'both') {
+            faces.forEach((f, fi) => {
+                const [a,b,c,d] = f.map(i => quadVerts[i]);
+                ctx.beginPath();
+                ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+                ctx.lineTo(c.x,c.y); ctx.lineTo(d.x,d.y);
+                ctx.closePath();
+                ctx.strokeStyle = fi === quadSelFace ? '#9b59b6' : '#4fc3f7';
+                ctx.lineWidth = fi === quadSelFace ? 2.5 : 1.2;
+                ctx.stroke();
+            });
+        }
+    }
+
+    // Vértices
+    quadVerts.forEach((v, i) => {
+        ctx.beginPath();
+        ctx.arc(v.x, v.y, vs, 0, 2*Math.PI);
+        ctx.fillStyle = i === quadSelected ? '#e74c3c' : '#f0f0f0';
+        ctx.fill();
+        ctx.strokeStyle = i === quadSelected ? '#c0392b' : '#888';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    });
+}
+
+// ── Drag & drop vértices en malla de quads ──
+const cvQ = document.getElementById('cvQuad');
+
+cvQ.addEventListener('mousedown', function(e) {
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const vs = quadGetVSize() + 5;
+    quadVerts.forEach((v, i) => {
+        if (Math.hypot(v.x - mx, v.y - my) < vs) quadDragging = i;
+    });
+    if (quadDragging !== null) { quadSelected = quadDragging; quadSelFace = null; quadDraw(); }
+});
+
+cvQ.addEventListener('mousemove', function(e) {
+    if (quadDragging === null) return;
+    const rect = this.getBoundingClientRect();
+    quadVerts[quadDragging].x = e.clientX - rect.left;
+    quadVerts[quadDragging].y = e.clientY - rect.top;
+    const v = quadVerts[quadDragging];
+    document.getElementById('quadInfo').innerHTML =
+        `<strong>Vértice #${quadDragging}</strong><br>` +
+        `Posición: (${v.x.toFixed(1)}, ${v.y.toFixed(1)})<br>` +
+        `Original: (${v.ox.toFixed(1)}, ${v.oy.toFixed(1)})<br><br>` +
+        `Observa cómo los quads adyacentes<br>se deforman suavemente.<br>` +
+        `Esta <strong>deformación controlada</strong><br>es clave en animación 3D.`;
+    quadDraw();
+});
+
+cvQ.addEventListener('mouseup', function() { quadDragging = null; });
+cvQ.addEventListener('mouseleave', function() { quadDragging = null; });
+
+// Click para seleccionar cara (cuando no se arrastra)
+cvQ.addEventListener('click', function(e) {
+    if (quadDragging !== null) return;
+    const rect = this.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const vs = quadGetVSize() + 4;
+
+    let hitV = null;
+    quadVerts.forEach((v, i) => { if (Math.hypot(v.x-mx,v.y-my) < vs) hitV = i; });
+    if (hitV !== null) {
+        quadSelected = hitV; quadSelFace = null;
+        const v = quadVerts[hitV];
+        document.getElementById('quadInfo').innerHTML =
+            `<strong>Vértice #${hitV}</strong><br>` +
+            `Posición: (${v.x.toFixed(1)}, ${v.y.toFixed(1)})<br>` +
+            `Original: (${v.ox.toFixed(1)}, ${v.oy.toFixed(1)})<br><br>` +
+            `<em>Arrastra este vértice para<br>deformar la malla.</em>`;
+        quadDraw(); return;
+    }
+
+    const sub = quadGetSub();
+    const faces = quadGetFaces(sub);
+    let hitF = null;
+    faces.forEach((f, fi) => {
+        const [a,b,c,d] = f.map(i => quadVerts[i]);
+        if (pointInQuad(mx, my, a,b,c,d)) hitF = fi;
+    });
+    quadSelected = null; quadSelFace = hitF;
+    if (hitF !== null) {
+        const f = faces[hitF];
+        const [a,b,c,d] = f.map(i => quadVerts[i]);
+        const area = triangleArea(a,b,c) + triangleArea(a,c,d);
+        document.getElementById('quadInfo').innerHTML =
+            `<strong>Quad #${hitF}</strong><br>` +
+            `Vértices: [${f.join(', ')}]<br>` +
+            `Área aprox: ${area.toFixed(1)} px²<br><br>` +
+            `Este quad se subdivide en<br><strong>2 triángulos</strong> internamente.<br>` +
+            `Usa el modo <strong>"→ Tris"</strong> para verlo.`;
+    } else {
+        document.getElementById('quadInfo').innerHTML =
+            `<strong>Arrastra</strong> un vértice para ver<br>cómo se deforma la malla.`;
+    }
+    quadDraw();
+});
+
+function pointInQuad(px,py,a,b,c,d) {
+    return pointInTri2(px,py,a,b,c) || pointInTri2(px,py,a,c,d);
+}
+
+// Touch support para móviles
+cvQ.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    const t = e.touches[0];
+    const rect = cvQ.getBoundingClientRect();
+    const mx = t.clientX - rect.left, my = t.clientY - rect.top;
+    const vs = quadGetVSize() + 8;
+    quadVerts.forEach((v,i) => { if (Math.hypot(v.x-mx,v.y-my) < vs) quadDragging = i; });
+    if (quadDragging !== null) { quadSelected = quadDragging; quadDraw(); }
+}, { passive: false });
+
+cvQ.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (quadDragging === null) return;
+    const t = e.touches[0];
+    const rect = cvQ.getBoundingClientRect();
+    quadVerts[quadDragging].x = t.clientX - rect.left;
+    quadVerts[quadDragging].y = t.clientY - rect.top;
+    quadDraw();
+}, { passive: false });
+
+cvQ.addEventListener('touchend', function() { quadDragging = null; });
+
+// ── Init ──
+triReset();
+quadReset();
+</script>
 </body>
 </html>
