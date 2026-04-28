@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformaciones 3D con Límites</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #222; color: white; font-family: sans-serif; }
+        canvas { display: block; }
+        #instrucciones {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 1.2rem; color: #4CAF50; }
+        ul { margin: 0; padding-left: 20px; }
+        li { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+
+    <div id="instrucciones">
+        <h1>Controles del Objeto 3D</h1>
+        <ul>
+            <li><strong>Traslación:</strong> Flechas (Limitado a la pantalla)</li>
+            <li><strong>Rotación:</strong> Teclas W, S, A, D</li>
+            <li><strong>Escalado:</strong> Teclas + y -</li>
+        </ul>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        const escena = new THREE.Scene();
+        
+        // Cámara
+        const camara = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camara.position.set(0, 3, 6);
+        camara.lookAt(0, 0, 0);
+
+        const renderizador = new THREE.WebGLRenderer({ antialias: true });
+        renderizador.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderizador.domElement);
+
+        // Cuadrícula y Cubo
+        const cuadricula = new THREE.GridHelper(20, 20);
+        escena.add(cuadricula);
+
+        const geometria = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshNormalMaterial(); 
+        const cubo = new THREE.Mesh(geometria, material);
+        cubo.position.y = 0.5;
+        escena.add(cubo);
+
+        // Variables de control
+        const velocidadTraslacion = 0.2;
+        const velocidadRotacion = 0.1;
+        const velocidadEscalado = 0.1;
+
+        // LiMITES
+        const limiteX = 8;      
+        const limiteZ_Fondo = -9; 
+        const limiteZ_Frente = 4; 
+
+        // teclado
+        window.addEventListener('keydown', (evento) => {
+            switch(evento.key) {
+                // LÍMITES
+                case 'ArrowUp':
+                   
+                    cubo.position.z = Math.max(limiteZ_Fondo, cubo.position.z - velocidadTraslacion);
+                    break;
+                case 'ArrowDown':
+                    
+                    cubo.position.z = Math.min(limiteZ_Frente, cubo.position.z + velocidadTraslacion);
+                    break;
+                case 'ArrowLeft':
+                    cubo.position.x = Math.max(-limiteX, cubo.position.x - velocidadTraslacion);
+                    break;
+                case 'ArrowRight':
+                    cubo.position.x = Math.min(limiteX, cubo.position.x + velocidadTraslacion);
+                    break;
+
+                //  ROTACION
+                case 'w': case 'W': cubo.rotation.x -= velocidadRotacion; break;
+                case 's': case 'S': cubo.rotation.x += velocidadRotacion; break;
+                case 'a': case 'A': cubo.rotation.y -= velocidadRotacion; break;
+                case 'd': case 'D': cubo.rotation.y += velocidadRotacion; break;
+
+                // ESCALADO
+                case '+':
+                    // Limitar el tamaño máximo también es buena práctica
+                    if (cubo.scale.x < 5) cubo.scale.addScalar(velocidadEscalado); 
+                    break;
+                case '-':
+                    if (cubo.scale.x > 0.2) cubo.scale.addScalar(-velocidadEscalado);
+                    break;
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            camara.aspect = window.innerWidth / window.innerHeight;
+            camara.updateProjectionMatrix();
+            renderizador.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        function animar() {
+            requestAnimationFrame(animar);
+            renderizador.render(escena, camara);
+        }
+
+        animar();
+    </script>
+</body>
+</html>

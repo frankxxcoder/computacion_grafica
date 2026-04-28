@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traslación 3D - Eje X</title>
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #111; }
+        canvas { display: block; }
+        #info {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: sans-serif;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="info">
+        <h2>Desplazamiento lineal de un cubo</h2>
+        <p>Concepto: Traslación en el Eje X</p>
+    </div>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+
+        // Escena
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+        //Cubo
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const material = new THREE.MeshNormalMaterial(); 
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+
+        //Cámara
+        camera.position.z = 5;
+
+        //movimiento
+        let velocidad = 0.05;
+        const limiteX = 3;
+
+        //Bucle 
+        function animate() {
+            requestAnimationFrame(animate);
+
+            //  horizontal 
+            cube.position.x += velocidad;
+
+            // recorrido 
+            if (cube.position.x > limiteX || cube.position.x < -limiteX) {
+                velocidad *= -1; // Inviertir el sentido del movimiento
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Ajustar tamaño si la ventana cambia
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
+    </script>
+</body>
+</html>
