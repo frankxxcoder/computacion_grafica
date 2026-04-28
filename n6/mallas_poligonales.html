@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mallas Poligonales</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f6f9;
+            line-height: 1.6;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        h2 {
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #2c3e50;
+        }
+        .formula {
+            background: #eef3ff;
+            border-left: 5px solid #2980b9;
+            padding: 12px;
+            margin: 15px 0;
+            font-family: "Courier New", monospace;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Mallas Poligonales: Estructura, Fundamentos y Aplicaciones en el Mundo Digital</h1>
+
+<h2>Introducción</h2>
+<p>
+En el ámbito de la computación gráfica y el diseño asistido por computadora (CAD), una <strong>malla poligonal</strong> es una colección de vértices, aristas y caras que definen la forma de un objeto tridimensional.
+</p>
+<p>
+Es el "esqueleto" digital que permite representar, renderizar y animar objetos en sistemas computacionales. Sin ellas, los videojuegos, efectos visuales y simulaciones modernas no existirían tal como los conocemos.
+</p>
+
+<h2>1. Componentes Geométricos</h2>
+<p>Una malla se compone de tres elementos fundamentales:</p>
+<ul>
+    <li><strong>Vértices:</strong> Puntos en el espacio definidos por coordenadas (x, y, z).</li>
+    <li><strong>Aristas:</strong> Segmentos que conectan vértices.</li>
+    <li><strong>Caras:</strong> Superficies cerradas formadas por aristas.</li>
+</ul>
+
+<h2>2. Tipos de Topología de Mallas</h2>
+
+<h3>Mallas de Triángulos (Tris)</h3>
+<ul>
+    <li><strong>Ventaja:</strong> Siempre coplanares, ideales para GPU.</li>
+    <li><strong>Desventaja:</strong> Difíciles de manipular en animación.</li>
+</ul>
+
+<h3>Mallas de Cuadriláteros (Quads)</h3>
+<ul>
+    <li><strong>Ventaja:</strong> Mejor deformación y flujo de geometría.</li>
+    <li><strong>Desventaja:</strong> Se convierten internamente en triángulos.</li>
+</ul>
+
+<h3>N-gons</h3>
+<ul>
+    <li>Caras con más de 4 lados.</li>
+    <li>Pueden causar errores visuales, pero útiles en modelado inicial.</li>
+</ul>
+
+<h2>3. Representación Matemática</h2>
+<p>
+La estructura de una malla sigue reglas matemáticas. Una de las más importantes es la característica de Euler:
+</p>
+
+<div class="formula">
+V - E + F = χ
+</div>
+
+<ul>
+    <li>V: número de vértices</li>
+    <li>E: número de aristas</li>
+    <li>F: número de caras</li>
+    <li>χ: característica de Euler (generalmente 2)</li>
+</ul>
+
+<h2>4. Estructuras de Datos</h2>
+
+<ul>
+    <li><strong>Lista de Caras:</strong> Simple pero limitada.</li>
+    <li><strong>Winged-edge:</strong> Permite navegación compleja.</li>
+    <li><strong>Half-edge:</strong> Optimizada para recorridos eficientes.</li>
+</ul>
+
+<h2>5. Aplicaciones Prácticas</h2>
+
+<table>
+    <tr>
+        <th>Campo</th>
+        <th>Uso</th>
+    </tr>
+    <tr>
+        <td>Videojuegos</td>
+        <td>Modelado optimizado de personajes y escenarios</td>
+    </tr>
+    <tr>
+        <td>Cine/VFX</td>
+        <td>Creación de modelos hiperrealistas</td>
+    </tr>
+    <tr>
+        <td>Impresión 3D</td>
+        <td>Uso de archivos STL</td>
+    </tr>
+    <tr>
+        <td>Ingeniería</td>
+        <td>Análisis de resistencia (FEA)</td>
+    </tr>
+</table>
+
+<h2>6. Conclusión</h2>
+<p>
+Las mallas poligonales constituyen la base del modelado 3D moderno. Su importancia radica en su equilibrio entre eficiencia y flexibilidad.
+</p>
+<p>
+Más allá de la cantidad de polígonos, el verdadero valor está en la <strong>topología</strong>: una organización adecuada que permite obtener modelos visualmente correctos y técnicamente optimizados.
+</p>
+
+</div>
+
+</body>
+</html>

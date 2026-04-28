@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Monografía: Curvas Paramétricas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+        }
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .formula {
+            background: #eef;
+            padding: 10px;
+            border-left: 5px solid #3498db;
+            margin: 10px 0;
+            font-family: "Courier New", monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Curvas Paramétricas</h1>
+
+<h2>1. Introducción</h2>
+<p>
+En el estudio de la geometría y el cálculo, solemos estar acostumbrados a las funciones explícitas de la forma <strong>y = f(x)</strong>. Sin embargo, la naturaleza y la física no siempre se ajustan a esta simplicidad.
+</p>
+<p>
+Imagina el vuelo de una mosca o el movimiento de un satélite: describir estos trayectos con una sola función resulta imposible o extremadamente complejo.
+</p>
+<p>
+Aquí es donde entran las <strong>curvas paramétricas</strong>. En lugar de definir una variable en términos de otra, definimos ambas (x e y) en función de una tercera variable independiente llamada parámetro (t).
+</p>
+
+<h2>2. Definición Matemática</h2>
+<p>
+Si f y g son funciones continuas de una variable t, el conjunto de puntos (x, y) definidos por:
+</p>
+
+<div class="formula">
+x = f(t)<br>
+y = g(t)
+</div>
+
+<p>Se denomina <strong>curva paramétrica</strong>.</p>
+
+<h3>Componentes Clave</h3>
+<ul>
+    <li><strong>Parámetro (t):</strong> Variable independiente (tiempo, ángulo, etc.).</li>
+    <li><strong>Orientación:</strong> Define la dirección en la que se recorre la curva.</li>
+</ul>
+
+<h2>3. Ventajas de la Parametrización</h2>
+
+<ul>
+    <li>Permiten representar curvas que no son funciones.</li>
+    <li>Modelan movimiento (posición, velocidad, aceleración).</li>
+    <li>Describen trayectorias complejas.</li>
+</ul>
+
+<table>
+    <tr>
+        <th>Característica</th>
+        <th>Ecuación Cartesiana</th>
+        <th>Ecuación Paramétrica</th>
+    </tr>
+    <tr>
+        <td>Relación</td>
+        <td>y depende de x</td>
+        <td>x e y dependen de t</td>
+    </tr>
+    <tr>
+        <td>Dirección</td>
+        <td>No definida</td>
+        <td>Definida por t</td>
+    </tr>
+    <tr>
+        <td>Flexibilidad</td>
+        <td>Limitada</td>
+        <td>Total</td>
+    </tr>
+</table>
+
+<h2>4. Ejemplos Clásicos</h2>
+
+<h3>A. Circunferencia</h3>
+<div class="formula">
+x = r cos(t)<br>
+y = r sin(t)
+</div>
+
+<p>Para 0 ≤ t ≤ 2π</p>
+
+<h3>B. Cicloide</h3>
+<div class="formula">
+x = r(t - sin(t))<br>
+y = r(1 - cos(t))
+</div>
+
+<h2>5. Cálculo con Curvas Paramétricas</h2>
+
+<h3>Derivada (Pendiente)</h3>
+<div class="formula">
+dy/dx = (dy/dt) / (dx/dt)
+</div>
+
+<h3>Longitud de Arco</h3>
+<div class="formula">
+L = ∫ √[(dx/dt)² + (dy/dt)²] dt
+</div>
+
+<h2>6. Aplicaciones en el Mundo Real</h2>
+
+<ul>
+    <li><strong>Ingeniería y Diseño:</strong> Curvas de Bézier.</li>
+    <li><strong>Física:</strong> Movimiento de proyectiles.</li>
+</ul>
+
+<div class="formula">
+x(t) = v₀ cos(θ) t<br>
+y(t) = v₀ sin(θ) t - (1/2)gt²
+</div>
+
+<ul>
+    <li><strong>Animación:</strong> Trayectorias en gráficos 3D.</li>
+</ul>
+
+<h2>7. Conclusión</h2>
+<p>
+Las curvas paramétricas representan un salto conceptual hacia la geometría del movimiento. Permiten describir trayectorias complejas de forma clara y precisa.
+</p>
+<p>
+Son fundamentales en la física moderna, la robótica y el diseño digital.
+</p>
+
+</div>
+
+</body>
+</html>
