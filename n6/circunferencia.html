@@ -4,9 +4,26 @@
     <meta charset="UTF-8">
     <title>Curva Paramétrica: Circunferencia</title>
     <style>
-        body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; background: #f0f0f0; }
-        canvas { background: white; border: 1px solid #ccc; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .controls { margin: 20px; padding: 15px; background: #fff; border-radius: 8px; }
+        body { 
+            font-family: sans-serif; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background: #f0f0f0; 
+            margin-top: 50px;
+        }
+        canvas { 
+            background: white; 
+            border: 1px solid #ccc; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+        .controls { 
+            margin: 20px; 
+            padding: 15px; 
+            background: #fff; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
     </style>
 </head>
 <body>
@@ -14,7 +31,9 @@
     <h2>Interacción: Circunferencia Paramétrica</h2>
     
     <div class="controls">
-        <label>Radio (r): <input type="range" id="radius" min="10" max="150" value="100"></label>
+        <label>Radio (r): 
+            <input type="range" id="radius" min="10" max="180" value="100">
+        </label>
         <span id="rVal">100</span>
     </div>
 
@@ -32,45 +51,56 @@
             const r = parseInt(rInput.value);
             rVal.innerText = r;
 
-            // Limpiar y centrar
+            // 1. Limpiar el lienzo
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
             ctx.save();
+            // 2. Centrar el origen (0,0) en la mitad del canvas
             ctx.translate(canvas.width / 2, canvas.height / 2);
 
-            // Dibujar ejes
-            ctx.strokeStyle = '#ddd';
-            ctx.beginPath(); ctx.moveTo(-200, 0); ctx.lineTo(200, 0); ctx.stroke();
-            ctx.beginPath(); ctx.moveTo(0, -200); ctx.lineTo(0, 200); ctx.stroke();
+            // 3. Dibujar ejes cartesianos (Gris oscuro para que se vean)
+            ctx.strokeStyle = '#bbb';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); 
+            ctx.moveTo(-200, 0); ctx.lineTo(200, 0); // Eje X
+            ctx.moveTo(0, -200); ctx.lineTo(0, 200); // Eje Y
+            ctx.stroke();
 
-            // Dibujar la trayectoria completa (tenue)
-            ctx.strokeStyle = '#eee';
+            // 4. Dibujar la trayectoria completa (Cambiado de #eee a #ddd para visibilidad)
+            ctx.strokeStyle = '#ddd';
+            ctx.lineWidth = 2;
             ctx.beginPath();
             ctx.arc(0, 0, r, 0, Math.PI * 2);
             ctx.stroke();
 
-            // Calcular coordenadas paramétricas
+            // 5. Calcular coordenadas paramétricas
+            // x = r * cos(t)
+            // y = r * sin(t)
             let x = r * Math.cos(t);
             let y = r * Math.sin(t);
 
-            // Dibujar vector desde el origen
+            // 6. Dibujar vector (radio) desde el origen al punto
             ctx.strokeStyle = '#3498db';
+            ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.moveTo(0,0);
-            ctx.lineTo(x, -y); // -y porque el eje Y en canvas crece hacia abajo
+            ctx.moveTo(0, 0);
+            ctx.lineTo(x, -y); // -y para corregir la inversión del eje Y en Canvas
             ctx.stroke();
 
-            // Dibujar punto actual
+            // 7. Dibujar el punto (partícula)
             ctx.fillStyle = '#e74c3c';
             ctx.beginPath();
-            ctx.arc(x, -y, 5, 0, Math.PI * 2);
+            ctx.arc(x, -y, 6, 0, Math.PI * 2);
             ctx.fill();
 
             ctx.restore();
 
-            t += 0.03; // Incrementar el parámetro
+            // 8. Incrementar parámetro t para la animación
+            t += 0.03; 
             requestAnimationFrame(draw);
         }
 
+        // Iniciar animación
         draw();
     </script>
 </body>
